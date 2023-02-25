@@ -10,10 +10,10 @@ const config = {
 
 	kit: {
 		adapter: adapter(),
-    alias: {
-      '@src': path.resolve('./src'),
-    },
-	}
+		alias: {
+			'@src': path.resolve('./src'),
+		},
+	},
 };
 
 export default config;

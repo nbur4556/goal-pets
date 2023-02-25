@@ -10,7 +10,7 @@
 	let type: string;
 	let formValues: Omit<CreatureType, 'type'> = {
 		name: '',
-		description: ''
+		description: '',
 	};
 
 	const onSelectType = (selectType: string) => {
