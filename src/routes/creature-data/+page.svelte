@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { creature } from '../../stores';
+	import { creature } from '@src/stores';
 </script>
 
 <main>

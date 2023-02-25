@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 
-	import { creature } from '../../stores';
-	import type { CreatureType } from '../../types/CreatureType';
+	import { creature } from '@src/stores';
+	import type { CreatureType } from '@src/types/CreatureType';
 
 	import SelectCreatureType from './SelectCreatureType.svelte';
 
