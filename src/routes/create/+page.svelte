@@ -13,7 +13,6 @@
 		description: '',
 	};
 
-  //TODO: on select type sets the pet value and navigates to step 1
   const onSelectType = (selectType: string) => {
     type = selectType;
     step = 1;
@@ -27,7 +26,7 @@
 
 <main>
   {#if step === 0}
-    <SelectPetType {onSelectType} />
+    <SelectPetType selectType={onSelectType} />
   {:else if step === 1}
     <form on:submit|preventDefault={onSubmit}>
       <label for="name">Name</label>

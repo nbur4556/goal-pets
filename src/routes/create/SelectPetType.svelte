@@ -1,5 +1,10 @@
 <script lang="ts">
-  export let onSelectType: (type: string) => void;
+  export let selectType: (type: string) => void;
+  
+  let otherTypeSelected = false;
+  let otherType = "";
+
+  const showOtherType = () => otherTypeSelected = true;
 </script>
 
 <h1>New Creature</h1>
@@ -9,15 +14,22 @@
 <h2>Choose a goal type:</h2>
 
 <ul>
-  <!-- //? Can we use data values here? -->
-  <li><button on:click={() => onSelectType("intellectual")}>Intellectual</button></li>
-  <li><button on:click={() => onSelectType("physical")}>Physical</button></li>
-  <li><button on:click={() => onSelectType("social")}>Social</button></li>
-  <li><button on:click={() => onSelectType("financial")}>Financial</button></li>
-  <li><button on:click={() => onSelectType("occupational")}>Occupational</button></li>
-  <li><button on:click={() => onSelectType("spiritual")}>Spiritual</button></li>
-  <li><button on:click={() => onSelectType("environmental")}>Environmental</button></li>
-  <li><button on:click={() => onSelectType("emotional")}>Emotional</button></li>
-  <!-- //TODO: if other is seleted, provide form to name that goal type -->
-  <li><button on:click={() => onSelectType("other")}>Other</button></li>
+  <li><button on:click={() => selectType("intellectual")}>Intellectual</button></li>
+  <li><button on:click={() => selectType("physical")}>Physical</button></li>
+  <li><button on:click={() => selectType("social")}>Social</button></li>
+  <li><button on:click={() => selectType("financial")}>Financial</button></li>
+  <li><button on:click={() => selectType("occupational")}>Occupational</button></li>
+  <li><button on:click={() => selectType("spiritual")}>Spiritual</button></li>
+  <li><button on:click={() => selectType("environmental")}>Environmental</button></li>
+  <li><button on:click={() => selectType("emotional")}>Emotional</button></li>
+
+  <li><button on:click={showOtherType}>Other</button></li>
+
+  {#if otherTypeSelected === true}
+    <form on:submit|preventDefault={() => selectType(otherType)}>
+      <label for="type">Type name</label>
+      <input type="text" name="type" bind:value={otherType} />
+      <button type="submit">Submit</button>
+    </form>
+  {/if}
 </ul>
