@@ -1,4 +1,7 @@
 <script lang="ts">
+  import { goto } from '$app/navigation';
+
+  import { pet } from '../../stores'
 	import type { PetType } from '../../types/PetType';
 
 	let formValues: PetType = {
@@ -8,14 +11,15 @@
 	};
 
 	const onSubmit = () => {
-		console.log(formValues);
+    pet.update(() => formValues);
+    goto('/pet-data');
 	};
 </script>
 
 <main>
 	<h1>Create Your Goal Pet</h1>
 
-	<form on:submit={onSubmit}>
+	<form on:submit|preventDefault={onSubmit}>
 		<label for="name">Name</label>
 		<input type="text" name="name" bind:value={formValues.name} />
 
