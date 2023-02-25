@@ -1,42 +1,41 @@
 <script lang="ts">
-  import { goto } from '$app/navigation';
+	import { goto } from '$app/navigation';
 
-  import { pet } from '../../stores'
-	import type { PetType } from '../../types/PetType';
+	import { creature } from '../../stores';
+	import type { CreatureType } from '../../types/CreatureType';
 
-  import SelectPetType from "./SelectPetType.svelte";
+	import SelectCreatureType from './SelectCreatureType.svelte';
 
-  let step: number = 0;
-  let type: string;
-	let formValues: Omit<PetType, "type"> = {
+	let step = 0;
+	let type: string;
+	let formValues: Omit<CreatureType, 'type'> = {
 		name: '',
-		description: '',
+		description: ''
 	};
 
-  const onSelectType = (selectType: string) => {
-    type = selectType;
-    step = 1;
-  }
+	const onSelectType = (selectType: string) => {
+		type = selectType;
+		step = 1;
+	};
 
 	const onSubmit = () => {
-    pet.update(() => ({...formValues, type}));
-    goto('/pet-data');
+		creature.update(() => ({ ...formValues, type }));
+		goto('/creature-data');
 	};
 </script>
 
 <main>
-  {#if step === 0}
-    <SelectPetType selectType={onSelectType} />
-  {:else if step === 1}
-    <form on:submit|preventDefault={onSubmit}>
-      <label for="name">Name</label>
-      <input type="text" name="name" bind:value={formValues.name} />
+	{#if step === 0}
+		<SelectCreatureType selectType={onSelectType} />
+	{:else if step === 1}
+		<form on:submit|preventDefault={onSubmit}>
+			<label for="name">Name</label>
+			<input type="text" name="name" bind:value={formValues.name} />
 
-      <label for="description">Description</label>
-      <input type="text" name="description" bind:value={formValues.description} />
+			<label for="description">Description</label>
+			<input type="text" name="description" bind:value={formValues.description} />
 
-      <button type="submit">Submit</button>
-    </form>
-  {/if}
-	
+			<button type="submit">Submit</button>
+		</form>
+	{/if}
 </main>

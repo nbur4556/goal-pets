@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store';
 
-import type { PetType } from './types/PetType';
+import type { CreatureType } from './types/CreatureType';
 
-export const pet = writable<PetType>({ name: '', description: '', type: '' });
+export const creature = writable<CreatureType>({ name: '', description: '', type: '' });
