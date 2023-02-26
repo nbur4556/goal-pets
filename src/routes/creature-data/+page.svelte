@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { creature } from '@src/stores';
-  import TempCreature from '@src/components/creatures/TempCreature.svelte';
+	import TempCreature from '@src/components/creatures/TempCreature.svelte';
 </script>
 
 <main>
@@ -8,5 +8,5 @@
 	<p>Type: {$creature.type}</p>
 	<p>{$creature.description}</p>
 
-  <TempCreature />
+	<TempCreature scale={0.15}/>
 </main>
