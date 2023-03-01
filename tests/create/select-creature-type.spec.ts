@@ -1,5 +1,16 @@
 import { expect, test } from '@playwright/test';
 
+const types = [
+	'intellectual',
+	'physical',
+	'social',
+	'financial',
+	'occupational',
+	'spiritual',
+	'environmental',
+	'emotional',
+];
+
 test.describe('create page', () => {
 	test.beforeEach(async ({ page }) => {
 		await page.goto('/create');
@@ -10,15 +21,9 @@ test.describe('create page', () => {
 		await expect(page.getByTestId('page-description')).toBeVisible();
 		await expect(page.getByTestId('page-subheading')).toBeVisible();
 
-		await expect(page.getByTestId('intellectual-type')).toBeVisible();
-		await expect(page.getByTestId('physical-type')).toBeVisible();
-		await expect(page.getByTestId('social-type')).toBeVisible();
-		await expect(page.getByTestId('financial-type')).toBeVisible();
-		await expect(page.getByTestId('occupational-type')).toBeVisible();
-		await expect(page.getByTestId('spiritual-type')).toBeVisible();
-		await expect(page.getByTestId('environmental-type')).toBeVisible();
-		await expect(page.getByTestId('emotional-type')).toBeVisible();
-		await expect(page.getByTestId('other-type')).toBeVisible();
+		for (const type of types) {
+			await expect(page.getByTestId(`${type}-type`)).toBeVisible();
+		}
 	});
 
 	test('other type button displays form to input type name', async ({ page }) => {
@@ -29,5 +34,27 @@ test.describe('create page', () => {
 
 		await expect(page.getByTestId('type-input')).toBeVisible();
 		await expect(page.getByTestId('submit-button')).toBeVisible();
+	});
+
+	for (const type of types) {
+		test(`${type} button adds the ${type} type to a created creature`, async ({ page }) => {
+			await page.getByTestId(`${type}-type`).click();
+			await page.getByTestId('submit-button').click();
+
+			await expect(page).toHaveURL(/.*creature-data/);
+			await expect(page.getByTestId('display-type')).toContainText(type);
+		});
+	}
+
+	test('other button add a user entered type to a created creature', async ({ page }) => {
+		const testType = 'Test';
+
+		await page.getByTestId('other-type').click();
+		await page.getByTestId('type-input').type(testType);
+		await page.getByTestId('submit-button').click();
+		await page.getByTestId('submit-button').click();
+
+		await expect(page).toHaveURL(/.*creature-data/);
+		await expect(page.getByTestId('display-type')).toContainText(testType);
 	});
 });

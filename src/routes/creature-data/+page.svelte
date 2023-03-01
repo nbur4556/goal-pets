@@ -12,6 +12,6 @@
 	</div>
 
 	<h1 class="text-center">Name: {$creature.name}</h1>
-	<p class="text-center">Type: {$creature.type}</p>
+	<p class="text-center" data-testid="display-type">Type: {$creature.type}</p>
 	<p class="col-span-2 text-center">{$creature.description}</p>
 </PageContent>
