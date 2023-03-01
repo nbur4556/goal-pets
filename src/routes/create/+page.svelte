@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 
+	import PageContent from '@src/components/ui/PageContent.svelte';
 	import { creature } from '@src/stores';
 	import type { CreatureType } from '@src/types/CreatureType';
 
@@ -24,7 +25,7 @@
 	};
 </script>
 
-<main>
+<PageContent>
 	{#if step === 0}
 		<SelectCreatureType selectType={onSelectType} />
 	{:else if step === 1}
@@ -38,4 +39,4 @@
 			<button type="submit">Submit</button>
 		</form>
 	{/if}
-</main>
+</PageContent>

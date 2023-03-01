@@ -2,4 +2,6 @@
 	import '@src/app.css';
 </script>
 
-<slot />
+<main class="flex justify-center">
+	<slot />
+</main>
