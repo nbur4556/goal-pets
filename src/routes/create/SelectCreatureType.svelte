@@ -1,6 +1,6 @@
 <script lang="ts">
   import Button from '@src/components/ui/Button.svelte';
-  import SubmitInput from '@src/components/ui/SubmitInput.svelte';
+  import TextInput from '@src/components/ui/TextInput.svelte';
 
 	export let selectType: (type: string) => void;
 
@@ -30,8 +30,7 @@
 
 {#if otherTypeSelected === true}
   <form on:submit|preventDefault={() => selectType(otherType)}>
-    <label for="type">Type name</label>
-    <input type="text" name="type" bind:value={otherType} />
+    <TextInput name="type" bind:value={otherType}>Type Name</TextInput>
 
     <!-- //TODO: Reuse button styles -->
     <input type="submit" class="border-2 hover:bg-gray-200 py-2 px-8 rounded-lg" />
