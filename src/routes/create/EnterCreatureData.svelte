@@ -13,7 +13,9 @@
 </script>
 
 <form on:submit|preventDefault={() => onSubmitData(formValues)} class="flex flex-col gap-4">
-	<InputText name="name" bind:value={formValues.name}>Name:</InputText>
-	<InputText name="description" bind:value={formValues.description}>Description:</InputText>
+	<InputText name="name" bind:value={formValues.name} testId="name-input">Name:</InputText>
+	<InputText name="description" bind:value={formValues.description} testId="description-input">
+		Description:
+	</InputText>
 	<InputSubmit />
 </form>

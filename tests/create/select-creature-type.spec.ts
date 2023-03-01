@@ -11,7 +11,7 @@ const types = [
 	'emotional',
 ];
 
-test.describe('create page', () => {
+test.describe('create page - select creature type', () => {
 	test.beforeEach(async ({ page }) => {
 		await page.goto('/create');
 	});
