@@ -2,6 +2,7 @@
 	export let scale = 1;
 	export let color = 'rgb(114,146,128)';
 	export let eyeColor = 'rgb(222,250,235)';
+  export let testId = 'temp-creature';
 
 	const viewWidth = 9934;
 	const viewHeight = 14044;
@@ -16,7 +17,8 @@
 	xmlns:xlink="http://www.w3.org/1999/xlink"
 	xml:space="preserve"
 	style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"
->
+  data-testid={testId}
+  >
 	<g transform="matrix(1,0,0,1,417.035,699.5)">
 		<circle cx="4549.5" cy="6916.5" r="2961.5" style={`fill:${color};`} />
 	</g>
