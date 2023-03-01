@@ -1,6 +1,5 @@
 <script>
-	import Link from '@src/components/ui/Link.svelte';
-	import PageContent from '@src/components/ui/PageContent.svelte';
+	import {Link, PageContent} from '@src/components/ui/index.svelte';
 </script>
 
 <PageContent>

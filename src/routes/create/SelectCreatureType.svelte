@@ -1,7 +1,5 @@
 <script lang="ts">
-  import Button from '@src/components/ui/Button.svelte';
-  import InputSubmit from '@src/components/ui/InputSubmit.svelte';
-  import InputText from '@src/components/ui/InputText.svelte';
+  import {Button, InputSubmit, InputText} from '@src/components/ui/index.svelte'
 
 	export let selectType: (type: string) => void;
 

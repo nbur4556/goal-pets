@@ -1,9 +1,8 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 
-  import InputSubmit from '@src/components/ui/InputSubmit.svelte';
-  import InputText from '@src/components/ui/InputText.svelte';
-	import PageContent from '@src/components/ui/PageContent.svelte';
+  import { InputSubmit, InputText, PageContent } from "@src/components/ui/index.svelte";
+
 	import { creature } from '@src/stores';
 	import type { CreatureType } from '@src/types/CreatureType';
 
