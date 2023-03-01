@@ -1,4 +1,6 @@
 <script lang="ts">
+  import Button from '@src/components/ui/Button.svelte';
+
 	export let selectType: (type: string) => void;
 
 	let otherTypeSelected = false;
@@ -13,23 +15,22 @@
 
 <h2>Choose a goal type:</h2>
 
-<ul>
-	<li><button on:click={() => selectType('intellectual')}>Intellectual</button></li>
-	<li><button on:click={() => selectType('physical')}>Physical</button></li>
-	<li><button on:click={() => selectType('social')}>Social</button></li>
-	<li><button on:click={() => selectType('financial')}>Financial</button></li>
-	<li><button on:click={() => selectType('occupational')}>Occupational</button></li>
-	<li><button on:click={() => selectType('spiritual')}>Spiritual</button></li>
-	<li><button on:click={() => selectType('environmental')}>Environmental</button></li>
-	<li><button on:click={() => selectType('emotional')}>Emotional</button></li>
-
-	<li><button on:click={showOtherType}>Other</button></li>
-
-	{#if otherTypeSelected === true}
-		<form on:submit|preventDefault={() => selectType(otherType)}>
-			<label for="type">Type name</label>
-			<input type="text" name="type" bind:value={otherType} />
-			<button type="submit">Submit</button>
-		</form>
-	{/if}
+<ul class="grid grid-cols-3 gap-4">
+	<li><Button onClick={() => selectType('intellectual')} exClass="w-full">Intellectual</Button></li>
+  <li><Button onClick={() => selectType('physical')} exClass="w-full">Physical</Button></li>
+	<li><Button onClick={() => selectType('social')} exClass="w-full">Social</Button></li>
+	<li><Button onClick={() => selectType('financial')} exClass="w-full">Financial</Button></li>
+	<li><Button onClick={() => selectType('occupational')} exClass="w-full">Occupational</Button></li>
+	<li><Button onClick={() => selectType('spiritual')} exClass="w-full">Spiritual</Button></li>
+	<li><Button onClick={() => selectType('environmental')} exClass="w-full">Environmental</Button></li>
+	<li><Button onClick={() => selectType('emotional')} exClass="w-full">Emotional</Button></li>
+	<li><Button onClick={showOtherType} exClass="w-full">Other</Button></li>
 </ul>
+
+{#if otherTypeSelected === true}
+  <form on:submit|preventDefault={() => selectType(otherType)}>
+    <label for="type">Type name</label>
+    <input type="text" name="type" bind:value={otherType} />
+    <button type="submit">Submit</button>
+  </form>
+{/if}
