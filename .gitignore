@@ -2,7 +2,10 @@
 node_modules
 /build
 /.svelte-kit
+/.vscode
 /package
+/test-reports
+/test-results
 .env
 .env.*
 !.env.example

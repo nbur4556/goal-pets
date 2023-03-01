@@ -6,6 +6,7 @@ const config: PlaywrightTestConfig = {
 		port: 4173,
 	},
 	testDir: 'tests',
+	reporter: [['html', { outputFolder: 'test-reports' }]],
 };
 
 export default config;
