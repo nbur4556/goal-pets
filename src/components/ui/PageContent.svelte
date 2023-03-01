@@ -1,3 +1,3 @@
-<section class="grid grid-cols-2 gap-2 m-10 w-8/12">
+<section class="m-10 grid w-8/12 grid-cols-2 gap-2">
 	<slot />
 </section>
