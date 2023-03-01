@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 
+  import InputSubmit from '@src/components/ui/InputSubmit.svelte';
+  import InputText from '@src/components/ui/InputText.svelte';
 	import PageContent from '@src/components/ui/PageContent.svelte';
-  import TextInput from '@src/components/ui/TextInput.svelte';
 	import { creature } from '@src/stores';
 	import type { CreatureType } from '@src/types/CreatureType';
 
@@ -31,11 +32,9 @@
 		<SelectCreatureType selectType={onSelectType} />
 	{:else if step === 1}
 		<form on:submit|preventDefault={onSubmit}>
-      <TextInput name="name" bind:value={formValues.name}>Name</TextInput>
-      <TextInput name="description" bind:value={formValues.description}>Description</TextInput>
-
-      <!-- //TODO: Reuse button styles -->
-      <input type="submit" class="border-2 hover:bg-gray-200 py-2 px-8 rounded-lg" />
+      <InputText name="name" bind:value={formValues.name}>Name</InputText>
+      <InputText name="description" bind:value={formValues.description}>Description</InputText>
+      <InputSubmit />
 		</form>
 	{/if}
 </PageContent>
