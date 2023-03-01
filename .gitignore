@@ -4,6 +4,7 @@ node_modules
 /.svelte-kit
 /package
 /test-reports
+/test-results
 .env
 .env.*
 !.env.example
