@@ -26,14 +26,16 @@
 	};
 </script>
 
-<PageContent>
-	{#if step === 0}
-		<SelectCreatureType selectType={onSelectType} />
-	{:else if step === 1}
-		<form on:submit|preventDefault={onSubmit}>
-      <InputText name="name" bind:value={formValues.name}>Name</InputText>
-      <InputText name="description" bind:value={formValues.description}>Description</InputText>
+{#if step === 0}
+  <PageContent>
+    <SelectCreatureType selectType={onSelectType} />
+  </PageContent>
+{:else if step === 1}
+  <PageContent>
+    <form on:submit|preventDefault={onSubmit} class="flex flex-col gap-4">
+      <InputText name="name" bind:value={formValues.name}>Name:</InputText>
+      <InputText name="description" bind:value={formValues.description}>Description:</InputText>
       <InputSubmit />
-		</form>
-	{/if}
-</PageContent>
+    </form>
+  </PageContent>
+{/if}
