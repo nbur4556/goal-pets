@@ -1,3 +1,7 @@
-<section class="m-10 grid w-8/12 grid-cols-2 gap-2">
+<script lang='ts'>
+  export let cols: "1"|"2"|"3"|"4"|"5"|"6"|"7"|"8"|"9"|"10"|"11"|"12" = "1";
+</script>
+
+<section class={`m-10 grid w-8/12 grid-cols-${cols} gap-2`}>
 	<slot />
 </section>
