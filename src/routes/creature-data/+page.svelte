@@ -1,9 +1,17 @@
 <script lang="ts">
 	import { creature } from '@src/stores';
+	import TempCreature from '@src/components/creatures/TempCreature.svelte';
+	import PageContent from '@src/components/ui/PageContent.svelte';
 </script>
 
-<main>
-	<h1>{$creature.name}</h1>
-	<p>Type: {$creature.type}</p>
-	<p>{$creature.description}</p>
-</main>
+<PageContent>
+	<div class="col-span-2 flex justify-center">
+		<div class="w-32">
+			<TempCreature />
+		</div>
+	</div>
+
+	<h1 class="text-center">Name: {$creature.name}</h1>
+	<p class="text-center">Type: {$creature.type}</p>
+	<p class="col-span-2 text-center">{$creature.description}</p>
+</PageContent>
