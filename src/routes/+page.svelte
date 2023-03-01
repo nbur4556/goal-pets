@@ -1,8 +1,8 @@
 <script>
-	import PageContent from '@src/components/ui/PageContent.svelte';
+	import { Link, PageContent } from '@src/components/ui/index.svelte';
 </script>
 
 <PageContent>
-	<h1>Welcome to Goal Pets!</h1>
-	<a href="/create">Create your Goal Pet now!</a>
+	<h1 class="text-center">Welcome to Goal Pets!</h1>
+	<Link to="/create" exClass="text-center">Create your Goal Pet now!</Link>
 </PageContent>

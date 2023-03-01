@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { creature } from '@src/stores';
 	import TempCreature from '@src/components/creatures/TempCreature.svelte';
-	import PageContent from '@src/components/ui/PageContent.svelte';
+	import { PageContent } from '@src/components/ui/index.svelte';
 </script>
 
-<PageContent>
+<PageContent cols="2">
 	<div class="col-span-2 flex justify-center">
 		<div class="w-32">
 			<TempCreature />
