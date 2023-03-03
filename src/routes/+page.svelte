@@ -5,4 +5,10 @@
 <PageContent>
 	<h1 class="text-center">Welcome to Goal Pets!</h1>
 	<Link to="/create" exClass="text-center">Create your Goal Pet now!</Link>
+
+	<!-- !Temporary create account form for testing -->
+	<form method="POST" action="?/createAccount">
+		<input type="text" name="username" />
+		<input type="submit" />
+	</form>
 </PageContent>
