@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { InputSubmit, InputText } from '@src/components/ui/index.svelte';
+	import { InputSubmit, InputText } from '@src/lib/components/ui/index.svelte';
 	import type { CreatureType } from '@src/types/CreatureType';
 
 	type TFormValues = Omit<CreatureType, 'type'>;

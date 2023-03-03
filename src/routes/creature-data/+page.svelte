@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { creature } from '@src/stores';
-	import TempCreature from '@src/components/creatures/TempCreature.svelte';
-	import { PageContent } from '@src/components/ui/index.svelte';
+	import TempCreature from '@src/lib/components/creatures/TempCreature.svelte';
+	import { PageContent } from '@src/lib/components/ui/index.svelte';
 </script>
 
 <PageContent cols="2">

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 
-	import { PageContent } from '@src/components/ui/index.svelte';
+	import { PageContent } from '@src/lib/components/ui/index.svelte';
 	import { creature } from '@src/stores';
 	import type { CreatureType } from '@src/types/CreatureType';
 
