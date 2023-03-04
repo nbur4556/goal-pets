@@ -6,12 +6,7 @@
 	export let appendFormData: (data: FormData) => void;
 </script>
 
-<form
-	method="POST"
-	action="?/createCreature"
-	class="flex flex-col gap-4"
-	use:enhance={({ data }) => appendFormData(data)}
->
+<form method="POST" class="flex flex-col gap-4" use:enhance={({ data }) => appendFormData(data)}>
 	<InputText name="name" testId="name-input">Name:</InputText>
 	<InputText name="description" testId="description-input">Description:</InputText>
 	<InputSubmit />
