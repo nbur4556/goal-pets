@@ -1,4 +1,4 @@
-import { redirect } from '@sveltejs/kit'
+import { redirect, error } from '@sveltejs/kit'
 
 import { createCreature } from '@src/lib/controllers/creatures';
 import type { CreatureClient } from '@src/lib/types/Creature';
@@ -7,13 +7,14 @@ import type { Actions } from './$types';
 
 export const actions = {
 	createCreature: async (event) => {
-		const data = await event.request.formData();
-    const accountId = 1;
+    const data = await event.request.formData();
+    const requiredData = ['accountId', 'name', 'type']
 
-		if (!data.get('name') || !data.get('description')) {
-			console.error('name and type required');
-			return;
-		}
+    requiredData.forEach(value => {
+      if (!data.get(value)) {
+        throw error(400, {message: `${value} is required`});
+      }
+    });
 
 		const creatureData: CreatureClient = {
 			name: data.get('name') as string,
@@ -21,9 +22,8 @@ export const actions = {
 			description: data.get('description') as string,
 		};
 
-		//TODO: Set account id
-    //TODO: Return a response
-		const creature = await createCreature(creatureData, accountId);
+    const accountId = parseInt(data.get('accountId') as string);
+    const creature = await createCreature(creatureData, accountId);
 
     if (creature?.id) {
       throw redirect(302, `/creature/${creature.id}`)
