@@ -3,7 +3,6 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 const handleCleanup = () => {
-	console.log('disconnect from database');
 	prisma.$disconnect();
 };
 
@@ -11,6 +10,20 @@ export const findAllAccounts = async () => {
 	try {
 		const allAccounts = await prisma.account.findMany();
 		return allAccounts;
+	} catch (err) {
+		//TODO: Handle Errors
+		console.error(err);
+	} finally {
+		handleCleanup();
+	}
+};
+
+export const findAccount = async (username: string) => {
+	try {
+		const account = await prisma.account.findUniqueOrThrow({
+			where: { username: username },
+		});
+		return account;
 	} catch (err) {
 		//TODO: Handle Errors
 		console.error(err);

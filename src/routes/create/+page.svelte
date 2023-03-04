@@ -3,7 +3,7 @@
 
 	import { PageContent } from '@src/lib/components/ui/index.svelte';
 	import { creature } from '@src/stores';
-	import type { CreatureType } from '@src/types/CreatureType';
+	import type { Creature } from '@src/lib/types/Creature';
 
 	import EnterCreatureData from './EnterCreatureData.svelte';
 	import SelectCreatureType from './SelectCreatureType.svelte';
@@ -16,7 +16,7 @@
 		step = 1;
 	};
 
-	const onSubmit = (values: Omit<CreatureType, 'type'>) => {
+	const onSubmit = (values: Omit<Creature, 'type'>) => {
 		creature.update(() => ({ ...values, type }));
 		goto('/creature-data');
 	};

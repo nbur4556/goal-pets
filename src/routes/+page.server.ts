@@ -1,5 +1,7 @@
+import { createAccount, findAccount, findAllAccounts } from '@src/lib/controllers/accounts';
+import { account as accountStore } from '@src/stores';
+
 import type { Actions, PageServerLoad } from './$types';
-import { createAccount, findAllAccounts } from '@src/lib/controllers/accounts';
 
 //! Temporary load all accounts for testing
 export const load = (async () => {
@@ -8,8 +10,8 @@ export const load = (async () => {
 	return { accounts };
 }) satisfies PageServerLoad;
 
+//TODO: Handle errors
 export const actions = {
-	//TODO: Handle errors
 	createAccount: async (event) => {
 		const data = await event.request.formData();
 		const username = data.get('username')?.toString();
@@ -20,5 +22,19 @@ export const actions = {
 		}
 
 		await createAccount(username);
+	},
+	loginAccount: async (event) => {
+		const data = await event.request.formData();
+		const username = data.get('username')?.toString();
+
+		if (!username) {
+			console.error('Error: username must be provided');
+			return;
+		}
+
+		const account = await findAccount(username);
+		if (account) {
+			accountStore.set({ id: account.id, username: account.username });
+		}
 	},
 } satisfies Actions;
