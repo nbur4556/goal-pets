@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { enhance } from '$app/forms';
+
 	import { Link, PageContent } from '@src/lib/components/ui/index.svelte';
 	import { account } from '@src/stores';
 
@@ -13,11 +15,24 @@
 	{:else}
 		<h1 class="text-center">Welcome to Goal Pets!</h1>
 	{/if}
+
 	<Link to="/create" exClass="text-center">Create your Goal Pet now!</Link>
 
 	<!-- //!Temporary login form for testing -->
-	<!-- //TODO: Do not reload on submit -->
-	<form method="POST" action="?/loginAccount">
+	<form
+		method="POST"
+		action="?/loginAccount"
+		use:enhance={() => {
+			return async ({ result }) => {
+				if (result.type === 'success' && result.data?.username && result.data?.id) {
+					account.set({
+						id: result.data.id,
+						username: result.data.username,
+					});
+				}
+			};
+		}}
+	>
 		<input type="text" name="username" class="border" />
 		<input type="submit" value="Login" class="border" />
 	</form>
