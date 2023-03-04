@@ -18,17 +18,17 @@ const creatureData = [
 ];
 
 async function main() {
-  for (const data of accountData) {
-    const result = await prisma.account.upsert({
+	for (const data of accountData) {
+		const result = await prisma.account.upsert({
 			where: { username: data.username },
 			update: {},
 			create: { username: data.username },
 		});
-    console.log(result);
-  }
+		console.log(result);
+	}
 
-  for (const data of creatureData) {
-    const result = await prisma.creature.create({
+	for (const data of creatureData) {
+		const result = await prisma.creature.create({
 			data: {
 				name: data.name,
 				type: data.type,
@@ -36,8 +36,8 @@ async function main() {
 				accountId: data.accountId,
 			},
 		});
-    console.log(result);
-  }
+		console.log(result);
+	}
 }
 
 main()
