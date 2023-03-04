@@ -1,3 +1,5 @@
+import { error } from '@sveltejs/kit';
+
 import { createAccount, findAccount, findAllAccounts } from '@src/lib/controllers/accounts';
 
 import type { Actions, PageServerLoad } from './$types';
@@ -8,28 +10,30 @@ export const load = (async () => {
 	return { accounts };
 }) satisfies PageServerLoad;
 
-//TODO: Handle errors
 export const actions = {
 	createAccount: async (event) => {
 		const data = await event.request.formData();
-		const username = data.get('username')?.toString();
+		const requiredData = ['username'];
 
-		if (!username) {
-			console.error('Error: username must be provided');
-			return;
-		}
+		requiredData.forEach((value) => {
+			if (!data.get(value)) {
+				throw error(400, { message: `${value} is required` });
+			}
+		});
 
-		await createAccount(username);
+		await createAccount(data.get('username') as string);
 	},
 	loginAccount: async (event) => {
 		const data = await event.request.formData();
-		const username = data.get('username')?.toString();
+		const requiredData = ['username'];
 
-		if (!username) {
-			console.error('Error: username must be provided');
-			return;
-		}
+		requiredData.forEach((value) => {
+			if (!data.get(value)) {
+				throw error(400, { message: `${value} is required` });
+			}
+		});
 
-		return findAccount(username);
+		const account = await findAccount(data.get('username') as string);
+		return account;
 	},
 } satisfies Actions;

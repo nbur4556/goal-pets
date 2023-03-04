@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+  import { error } from '@sveltejs/kit';
 
 	import { Link, PageContent } from '@src/lib/components/ui/index.svelte';
 	import { paths } from '@src/lib/paths';
@@ -20,18 +21,27 @@
 	<Link to={paths.creature.create} exClass="text-center">Create your Goal Pet now!</Link>
 
 	<!-- //!Temporary login form for testing -->
+  <!-- //! not routing to error page on error  -->
 	<form
 		method="POST"
 		action="?/loginAccount"
 		use:enhance={() => {
 			return async ({ result }) => {
-				if (result.type === 'success' && result.data?.username && result.data?.id) {
-					account.set({
-						id: result.data.id,
-						username: result.data.username,
-					});
-				}
-			};
+        switch(result.type) {
+          case 'success': {
+            if (result.type === 'success' && result.data?.username && result.data?.id) {
+                account.set({
+                  id: result.data.id,
+                  username: result.data.username,
+                });
+				    }
+            break;
+          }
+          default: {
+            throw error(500);
+          }
+        }
+      };
 		}}
 	>
 		<input type="text" name="username" class="border" />
