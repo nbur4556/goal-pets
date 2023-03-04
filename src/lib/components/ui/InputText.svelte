@@ -1,6 +1,6 @@
 <script lang="ts">
 	export let name: string;
-	export let value: string;
+	export let value: string | undefined = undefined;
 	export let testId = 'input';
 </script>
 

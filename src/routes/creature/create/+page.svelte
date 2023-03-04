@@ -1,9 +1,6 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
-
-	import { PageContent } from '@src/components/ui/index.svelte';
-	import { creature } from '@src/stores';
-	import type { CreatureType } from '@src/types/CreatureType';
+	import { PageContent } from '@src/lib/components/ui/index.svelte';
+	import { account } from '@src/stores';
 
 	import EnterCreatureData from './EnterCreatureData.svelte';
 	import SelectCreatureType from './SelectCreatureType.svelte';
@@ -16,9 +13,11 @@
 		step = 1;
 	};
 
-	const onSubmit = (values: Omit<CreatureType, 'type'>) => {
-		creature.update(() => ({ ...values, type }));
-		goto('/creature-data');
+	const onSubmit = (data: FormData) => {
+		if ($account?.id) {
+			data.append('accountId', $account.id.toString());
+			data.append('type', type);
+		}
 	};
 </script>
 
@@ -28,6 +27,6 @@
 	</PageContent>
 {:else if step === 1}
 	<PageContent>
-		<EnterCreatureData onSubmitData={onSubmit} />
+		<EnterCreatureData appendFormData={onSubmit} />
 	</PageContent>
 {/if}

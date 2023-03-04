@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store';
 
-import type { CreatureType } from './types/CreatureType';
+import type { AccountClient } from './lib/types/Account';
 
-export const creature = writable<CreatureType>({ name: '', description: '', type: '' });
+export const account = writable<AccountClient | undefined>();
