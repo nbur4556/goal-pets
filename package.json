@@ -2,6 +2,9 @@
 	"name": "goal-pets",
 	"version": "0.0.1",
 	"private": true,
+	"prisma": {
+		"seed": "node prisma/seed.js"
+	},
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",

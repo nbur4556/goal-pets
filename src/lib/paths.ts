@@ -1,7 +1,7 @@
 export const paths = {
-  home: "/",
-  creature :{
-    id: (id: string) => `/creature/${id}`,
-    create: "/creature/create",
-  }
-}
+	home: '/',
+	creature: {
+		id: (id: string) => `/creature/${id}`,
+		create: '/creature/create',
+	},
+};

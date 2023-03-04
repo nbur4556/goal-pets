@@ -2,7 +2,7 @@
 	import { enhance } from '$app/forms';
 
 	import { Link, PageContent } from '@src/lib/components/ui/index.svelte';
-  import {paths} from '@src/lib/paths';
+	import { paths } from '@src/lib/paths';
 	import { account } from '@src/stores';
 
 	import type { PageData } from './$types';

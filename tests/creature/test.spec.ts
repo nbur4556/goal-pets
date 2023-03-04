@@ -8,6 +8,6 @@ test.describe('creature-data page', () => {
 		await expect(page.getByTestId('display-type')).toBeVisible();
 		await expect(page.getByTestId('display-description')).toBeVisible();
 	});
-  
-  //TODO: Test for error page on invalid creature id
+
+	//TODO: Test for error page on invalid creature id
 });

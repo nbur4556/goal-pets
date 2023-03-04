@@ -14,7 +14,7 @@ test.describe('create page - enter creature data', () => {
 		await expect(page.getByTestId('submit-button')).toBeVisible();
 	});
 
-  //TODO: Reinclude tests when authorization is added
+	//TODO: Reinclude tests when authorization is added
 	test.skip('name input value adds the name to a created creature', async ({ page }) => {
 		const testName = 'John Doe';
 
@@ -25,8 +25,10 @@ test.describe('create page - enter creature data', () => {
 		await expect(page.getByTestId('display-name')).toContainText(testName);
 	});
 
-  //TODO: Reinclude tests when authorization is added
-	test.skip('description input value adds the description to a created creature', async ({ page }) => {
+	//TODO: Reinclude tests when authorization is added
+	test.skip('description input value adds the description to a created creature', async ({
+		page,
+	}) => {
 		const testDescription = 'Lorem Ipsum';
 
 		await page.getByTestId('description-input').type(testDescription);
