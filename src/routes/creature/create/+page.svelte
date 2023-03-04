@@ -28,6 +28,6 @@
 	</PageContent>
 {:else if step === 1}
 	<PageContent>
-		<EnterCreatureData onSubmitData={onSubmit} />
+		<EnterCreatureData {type} onSubmitData={onSubmit} />
 	</PageContent>
 {/if}

@@ -1,6 +1,6 @@
 export interface CreatureClient {
-  id?: number;
+	id?: number;
 	name: string;
-	description: string;
 	type: string;
+	description?: string;
 }

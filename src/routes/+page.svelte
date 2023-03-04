@@ -16,7 +16,7 @@
 		<h1 class="text-center">Welcome to Goal Pets!</h1>
 	{/if}
 
-	<Link to="/create" exClass="text-center">Create your Goal Pet now!</Link>
+	<Link to="/creature/create" exClass="text-center">Create your Goal Pet now!</Link>
 
 	<!-- //!Temporary login form for testing -->
 	<form
