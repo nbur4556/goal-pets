@@ -36,7 +36,7 @@ test.describe('create page - select creature type', () => {
 		await expect(page.getByTestId('submit-button')).toBeVisible();
 	});
 
-	//TODO: Reinclude tests when authorization is added
+	// TODO Reinclude tests when authorization is added
 	for (const type of types) {
 		test.skip(`${type} button adds the ${type} type to a created creature`, async ({ page }) => {
 			await page.getByTestId(`${type}-type`).click();
@@ -47,7 +47,7 @@ test.describe('create page - select creature type', () => {
 		});
 	}
 
-	//TODO: Reinclude tests when authorization is added
+	// TODO Reinclude tests when authorization is added
 	test.skip('other button add a user entered type to a created creature', async ({ page }) => {
 		const testType = 'Test';
 

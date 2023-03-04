@@ -18,7 +18,7 @@ export const createCreature = async (creatureData: CreatureClient, accountId: nu
 		.create({
 			data: {
 				...creatureData,
-				//TODO: Validate accountId
+				// TODO Validate accountId
 				accountId: accountId,
 			},
 		})
