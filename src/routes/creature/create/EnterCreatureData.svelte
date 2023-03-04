@@ -2,12 +2,8 @@
 	import { enhance } from '$app/forms';
 
 	import { InputSubmit, InputText } from '@src/lib/components/ui/index.svelte';
-	import type { CreatureClient } from '@src/lib/types/Creature';
-
-	type TFormValues = Omit<CreatureClient, 'type'>;
-
-	export let type: string;
-	export let onSubmitData: (values: TFormValues) => void;
+	
+  export let type: string;
 </script>
 
 <form
