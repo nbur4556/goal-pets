@@ -8,11 +8,6 @@
 
 	export let type: string;
 	export let onSubmitData: (values: TFormValues) => void;
-
-	let formValues: TFormValues = {
-		name: '',
-		description: '',
-	};
 </script>
 
 <form
@@ -23,9 +18,8 @@
 		data.append('type', type);
 	}}
 >
-	<!-- //TODO: Remove values from input text -->
-	<InputText name="name" bind:value={formValues.name} testId="name-input">Name:</InputText>
-	<InputText name="description" bind:value={formValues.name} testId="description-input">
+	<InputText name="name" testId="name-input">Name:</InputText>
+	<InputText name="description" testId="description-input">
 		Description:
 	</InputText>
 	<InputSubmit />
