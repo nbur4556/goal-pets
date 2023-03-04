@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { InputSubmit, InputText } from '@src/lib/components/ui/index.svelte';
-	import type { Creature } from '@src/lib/types/Creature';
+	import type { CreatureClient } from '@src/lib/types/Creature';
 
-	type TFormValues = Omit<Creature, 'type'>;
+	type TFormValues = Omit<CreatureClient, 'type'>;
 
 	export let onSubmitData: (values: TFormValues) => void;
 
