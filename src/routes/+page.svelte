@@ -2,6 +2,7 @@
 	import { enhance } from '$app/forms';
 
 	import { Link, PageContent } from '@src/lib/components/ui/index.svelte';
+  import {paths} from '@src/lib/paths';
 	import { account } from '@src/stores';
 
 	import type { PageData } from './$types';
@@ -16,7 +17,7 @@
 		<h1 class="text-center">Welcome to Goal Pets!</h1>
 	{/if}
 
-	<Link to="/creature/create" exClass="text-center">Create your Goal Pet now!</Link>
+	<Link to={paths.creature.create} exClass="text-center">Create your Goal Pet now!</Link>
 
 	<!-- //!Temporary login form for testing -->
 	<form

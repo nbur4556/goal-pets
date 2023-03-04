@@ -1,6 +1,7 @@
 import { redirect, error } from '@sveltejs/kit'
 
 import { createCreature } from '@src/lib/controllers/creatures';
+import { paths } from '@src/lib/paths';
 import type { CreatureClient } from '@src/lib/types/Creature';
 
 import type { Actions } from './$types';
@@ -26,7 +27,7 @@ export const actions = {
     const creature = await createCreature(creatureData, accountId);
 
     if (creature?.id) {
-      throw redirect(302, `/creature/${creature.id}`)
+      throw redirect(302, paths.creature.id(creature.id.toString()))
     }
 	},
 } satisfies Actions;
