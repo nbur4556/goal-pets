@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { PageContent } from '@src/lib/components/ui/index.svelte';
+	import { account } from '@src/stores';
 
 	import EnterCreatureData from './EnterCreatureData.svelte';
 	import SelectCreatureType from './SelectCreatureType.svelte';
@@ -11,6 +12,13 @@
 		type = selectType;
 		step = 1;
 	};
+
+	const onSubmit = (data: FormData) => {
+		if ($account?.id) {
+			data.append('accountId', $account.id.toString());
+			data.append('type', type);
+		}
+	};
 </script>
 
 {#if step === 0}
@@ -19,6 +27,6 @@
 	</PageContent>
 {:else if step === 1}
 	<PageContent>
-		<EnterCreatureData {type} />
+		<EnterCreatureData appendFormData={onSubmit} />
 	</PageContent>
 {/if}
