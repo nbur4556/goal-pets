@@ -11,10 +11,10 @@ datasource db {
 }
 
 model User {
-  id            String @id @default(uuid())
-  username      String @unique @db.VarChar(255)
-  passwordHash  String @db.VarChar(255)
-  userAuthToken String @unique
+  id            String  @id @default(uuid())
+  username      String  @unique @db.VarChar(255)
+  passwordHash  String  @db.VarChar(255)
+  userAuthToken String? @unique
 
   account   Account @relation(fields: [accountId], references: [id])
   accountId String  @unique
@@ -25,7 +25,7 @@ model User {
 
 model Account {
   id          String @id @default(uuid())
-  displayName String @unique @db.VarChar(255)
+  displayName String @db.VarChar(255)
 
   User      User?
   creatures Creature[]

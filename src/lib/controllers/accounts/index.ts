@@ -15,14 +15,3 @@ export const findAccount = async (displayName: string) => {
 		.finally(() => prisma.$disconnect());
 	return account;
 };
-
-export const createAccount = async (displayName: string) => {
-	const account = await prisma.account
-		.create({
-			data: {
-				displayName: displayName,
-			},
-		})
-		.finally(() => prisma.$disconnect());
-	return account;
-};
