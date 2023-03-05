@@ -7,20 +7,20 @@ export const findAllAccounts = async () => {
 	return allAccounts;
 };
 
-export const findAccount = async (username: string) => {
+export const findAccount = async (displayName: string) => {
 	const account = await prisma.account
 		.findUniqueOrThrow({
-			where: { username: username },
+			where: { displayName: displayName },
 		})
 		.finally(() => prisma.$disconnect());
 	return account;
 };
 
-export const createAccount = async (username: string) => {
+export const createAccount = async (displayName: string) => {
 	const account = await prisma.account
 		.create({
 			data: {
-				username: username,
+				displayName: displayName,
 			},
 		})
 		.finally(() => prisma.$disconnect());
