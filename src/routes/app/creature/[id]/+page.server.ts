@@ -4,11 +4,11 @@ import { findCreatureById } from '@src/lib/controllers/creatures';
 
 import type { PageServerLoad } from './$types';
 
-export const load = (async ({ locals, params }) => {
+export const load: PageServerLoad = async ({ locals, params }) => {
 	if (!locals.account) {
-		throw error(402, 'not authenticated');
+		throw error(401, 'not authenticated');
 	}
 
 	const creature = await findCreatureById(params.id);
 	return { creature };
-}) satisfies PageServerLoad;
+};

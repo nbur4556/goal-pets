@@ -1,11 +1,22 @@
-<script>
+<script lang="ts">
 	import { Link, PageContent } from '@src/lib/components/ui/index.svelte';
 	import { paths } from '@src/lib/paths';
 	import { account } from '@src/stores';
+
+	import type { PageData } from './$types';
+
+	export let data: PageData;
 </script>
 
-<!-- //TODO: Logout functionality -->
+<!-- //TODO: Logout functionality (remove cookie, remove account from store, remove account id from locals) -->
 <PageContent>
 	<h1>Welcome {$account?.displayName || 'Player'}!</h1>
 	<Link to={paths.app.creature.create}>Create a new Creature!</Link>
+
+	<h2>Your Creatures</h2>
+	<ul>
+		{#each data.creatures as creature}
+			<li>{'>>'} {creature.name} - {creature.description}</li>
+		{/each}
+	</ul>
 </PageContent>

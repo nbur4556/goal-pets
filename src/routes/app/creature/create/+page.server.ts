@@ -11,7 +11,7 @@ const newCreature: Action = async ({ locals, request }) => {
 	const requiredData = ['name', 'type'];
 
 	if (!locals.account) {
-		throw error(402, { message: 'not authenticated' });
+		throw error(401, { message: 'not authenticated' });
 	}
 
 	requiredData.forEach((value) => {
