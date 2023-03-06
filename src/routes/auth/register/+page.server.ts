@@ -1,8 +1,12 @@
-import { error } from '@sveltejs/kit';
+import { env } from '$env/dynamic/private';
+import { error, redirect } from '@sveltejs/kit';
 
 import { register } from '@src/lib/controllers/auth';
+import { paths } from '@src/lib/paths';
 
 import type { Actions, Action } from './$types';
+
+const tokenExpiration = 60 * 60 * 12;
 
 //TODO: password strength requirements
 const registerUser: Action = async (event) => {
@@ -19,8 +23,17 @@ const registerUser: Action = async (event) => {
 		throw error(400, { message: 'password and confirm password do not match' });
 	}
 
-	const user = register(data.get('username') as string, data.get('password') as string);
-	return user;
+	const token = await register(data.get('username') as string, data.get('password') as string);
+	if (token) {
+		event.cookies.set('session', token, {
+			path: '/',
+			sameSite: 'strict',
+			secure: env.NODE_ENV === 'production',
+			maxAge: tokenExpiration,
+		});
+
+		throw redirect(302, paths.home);
+	}
 };
 
 export const actions: Actions = { default: registerUser };

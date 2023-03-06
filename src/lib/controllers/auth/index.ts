@@ -1,13 +1,26 @@
+import { env } from '$env/dynamic/private';
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 const prisma = new PrismaClient();
+const tokenExpiration = 60 * 60 * 12;
 
-//TODO: Use JWTs
+const signToken = async (userId: string, accountId: string) => {
+	const token = await jwt.sign({ userId: userId, accountId: accountId }, env.JWT_SECRET, {
+		expiresIn: tokenExpiration,
+	});
+
+	await prisma.user.update({
+		where: { id: userId },
+		data: { userAuthToken: token },
+	});
+
+	return token;
+};
 
 export const register = async (username: string, password: string) => {
 	const passwordHash = await bcrypt.hash(password, 10);
-	console.log(passwordHash);
 
 	const user = await prisma.user.create({
 		data: {
@@ -23,15 +36,19 @@ export const register = async (username: string, password: string) => {
 		},
 	});
 
-	return user;
+	return signToken(user.id, user.accountId);
 };
 
-export const authenticate = async (username: string, password: string) => {
+export const authorize = async (username: string, password: string) => {
 	const user = await prisma.user.findUniqueOrThrow({
 		where: { username: username },
-		select: { passwordHash: true },
 	});
 
 	const result = await bcrypt.compare(password, user.passwordHash);
-	return result;
+
+	if (result !== true) {
+		throw 'authorization failed';
+	}
+
+	return signToken(user.id, user.accountId);
 };

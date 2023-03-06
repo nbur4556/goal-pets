@@ -13,4 +13,5 @@
 
 	<Link to={paths.creature.create} exClass="text-center">Create your Goal Pet now!</Link>
 	<Link to={paths.auth.register} exClass="text-center">Register</Link>
+	<Link to={paths.auth.login} exClass="text-center">Login</Link>
 </PageContent>
