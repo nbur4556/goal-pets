@@ -5,6 +5,7 @@ import jwt from 'jsonwebtoken';
 import type { JwtPayload } from 'jsonwebtoken';
 
 const prisma = new PrismaClient();
+//TODO: Make reusable
 const tokenExpiration = 60 * 60 * 12;
 
 interface AuthTokenPayload extends JwtPayload {

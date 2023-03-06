@@ -1,20 +1,12 @@
 import { findAccount } from '@src/lib/controllers/accounts';
-import { authenticateToken } from '@src/lib/controllers/auth';
 
 import type { LayoutServerLoad } from './$types';
 
-//TODO: Confirm not authenticated if token is expired
-export const load: LayoutServerLoad = async ({ cookies }) => {
-	const token = cookies.get('session');
-	if (!token) {
+export const load: LayoutServerLoad = async ({ locals }) => {
+	if (!locals.account) {
 		return;
 	}
 
-	const tokenResult = await authenticateToken(token);
-	if (!tokenResult) {
-		return;
-	}
-
-	const account = await findAccount(tokenResult.accountId);
+	const account = await findAccount(locals.account);
 	return { account };
 };

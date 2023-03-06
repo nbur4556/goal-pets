@@ -6,6 +6,7 @@ import { paths } from '@src/lib/paths';
 
 import type { Actions, Action } from './$types';
 
+//TODO: Make reusable
 const tokenExpiration = 60 * 60 * 12;
 
 //TODO: password strength requirements
