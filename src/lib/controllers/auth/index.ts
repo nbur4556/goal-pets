@@ -2,9 +2,15 @@ import { env } from '$env/dynamic/private';
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import type { JwtPayload } from 'jsonwebtoken';
 
 const prisma = new PrismaClient();
 const tokenExpiration = 60 * 60 * 12;
+
+interface AuthTokenPayload extends JwtPayload {
+	accountId: string;
+	userId: string;
+}
 
 const signToken = async (userId: string, accountId: string) => {
 	const token = await jwt.sign({ userId: userId, accountId: accountId }, env.JWT_SECRET, {
@@ -51,4 +57,19 @@ export const authorize = async (username: string, password: string) => {
 	}
 
 	return signToken(user.id, user.accountId);
+};
+
+export const authenticateToken = async (token: string) => {
+	const result = jwt.verify(token, env.JWT_SECRET) as AuthTokenPayload;
+
+	const user = await prisma.user.findUniqueOrThrow({
+		where: { id: result.userId },
+		select: { userAuthToken: true },
+	});
+
+	if (token !== user.userAuthToken) {
+		return;
+	}
+
+	return result;
 };

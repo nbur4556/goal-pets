@@ -7,10 +7,10 @@ export const findAllAccounts = async () => {
 	return allAccounts;
 };
 
-export const findAccount = async (displayName: string) => {
+export const findAccount = async (accountId: string) => {
 	const account = await prisma.account
 		.findUniqueOrThrow({
-			where: { displayName: displayName },
+			where: { id: accountId },
 		})
 		.finally(() => prisma.$disconnect());
 	return account;

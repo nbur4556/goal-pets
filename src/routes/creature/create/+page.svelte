@@ -14,8 +14,8 @@
 	};
 
 	const onSubmit = (data: FormData) => {
-		if ($account?.id) {
-			data.append('accountId', $account.id.toString());
+		if ($account) {
+			data.append('accountId', $account.id);
 			data.append('type', type);
 		}
 	};

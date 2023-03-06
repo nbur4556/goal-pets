@@ -23,7 +23,7 @@ export const actions = {
 			description: data.get('description') as string,
 		};
 
-		const accountId = parseInt(data.get('accountId') as string);
+		const accountId = data.get('accountId') as string;
 		const creature = await createCreature(creatureData, accountId);
 
 		if (creature?.id) {
