@@ -53,10 +53,8 @@ const accountData = [
 
 async function main() {
 	for (const data of accountData) {
-		const result = await prisma.account.upsert({
-			where: { displayName: data.displayName },
-			update: {},
-			create: {
+		const result = await prisma.account.create({
+			data: {
 				displayName: data.displayName,
 				creatures: {
 					create: data.creatures,

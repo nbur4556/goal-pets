@@ -33,8 +33,6 @@ export const register = async (username: string, password: string) => {
 		data: {
 			username: username,
 			passwordHash: passwordHash,
-			//TODO: Remove user auth token. This should be optional
-			userAuthToken: crypto.getRandomValues(new Uint32Array(1))[0].toString(),
 			account: {
 				create: {
 					displayName: username,
