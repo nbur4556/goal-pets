@@ -32,7 +32,7 @@ const registerUser: Action = async (event) => {
 			maxAge: tokenExpiration,
 		});
 
-		throw redirect(302, paths.home);
+		throw redirect(302, paths.app.home);
 	}
 };
 

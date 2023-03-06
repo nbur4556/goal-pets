@@ -27,7 +27,7 @@ export const actions = {
 		const creature = await createCreature(creatureData, accountId);
 
 		if (creature?.id) {
-			throw redirect(302, paths.creature.id(creature.id.toString()));
+			throw redirect(302, paths.app.creature.id(creature.id.toString()));
 		}
 	},
 } satisfies Actions;
