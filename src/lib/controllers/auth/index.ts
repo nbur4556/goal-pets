@@ -72,3 +72,14 @@ export const authenticateToken = async (token: string) => {
 
 	return result;
 };
+
+export const removeAuthentication = async (accountId?: string) => {
+  if(!accountId) {
+    return;
+  }
+
+  await prisma.user.update({
+    where: { accountId: accountId },
+    data: { userAuthToken: "" }
+  });
+}

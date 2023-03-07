@@ -1,5 +1,7 @@
 <script lang="ts">
-	import { Link, PageContent } from '@src/lib/components/ui/index.svelte';
+  import { enhance } from '$app/forms';
+
+	import { InputSubmit, Link, PageContent } from '@src/lib/components/ui/index.svelte';
 	import { paths } from '@src/lib/paths';
 	import { account } from '@src/stores';
 
@@ -19,4 +21,8 @@
 			<li>{'>>'} {creature.name} - {creature.description}</li>
 		{/each}
 	</ul>
+
+  <form method="POST" use:enhance={() => account.set(undefined)}>
+    <InputSubmit value="Logout" />
+  </form>
 </PageContent>
