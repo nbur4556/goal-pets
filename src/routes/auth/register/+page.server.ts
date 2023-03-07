@@ -1,13 +1,10 @@
 import { env } from '$env/dynamic/private';
 import { error, redirect } from '@sveltejs/kit';
 
-import { register } from '@src/lib/controllers/auth';
+import { register, TOKEN_EXPIRATION } from '@src/lib/controllers/auth';
 import { paths } from '@src/lib/paths';
 
 import type { Actions, Action } from './$types';
-
-//TODO: Make reusable
-const tokenExpiration = 60 * 60 * 12;
 
 //TODO: password strength requirements
 const registerUser: Action = async (event) => {
@@ -30,7 +27,7 @@ const registerUser: Action = async (event) => {
 			path: '/',
 			sameSite: 'strict',
 			secure: env.NODE_ENV === 'production',
-			maxAge: tokenExpiration,
+			maxAge: TOKEN_EXPIRATION,
 		});
 
 		throw redirect(302, paths.app.home);

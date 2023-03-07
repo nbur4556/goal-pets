@@ -1,13 +1,10 @@
 import { env } from '$env/dynamic/private';
 import { error, redirect } from '@sveltejs/kit';
 
-import { authorize } from '@src/lib/controllers/auth';
+import { authorize, TOKEN_EXPIRATION } from '@src/lib/controllers/auth';
 import { paths } from '@src/lib/paths';
 
 import type { Actions, Action } from './$types';
-
-//TODO: Make reusable
-const tokenExpiration = 60 * 60 * 12;
 
 const authenticateUser: Action = async (event) => {
 	const data = await event.request.formData();
@@ -25,7 +22,7 @@ const authenticateUser: Action = async (event) => {
 			path: '/',
 			sameSite: 'strict',
 			secure: env.NODE_ENV === 'production',
-			maxAge: tokenExpiration,
+			maxAge: TOKEN_EXPIRATION,
 		});
 
 		throw redirect(302, paths.app.home);

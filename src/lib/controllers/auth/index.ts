@@ -5,8 +5,7 @@ import jwt from 'jsonwebtoken';
 import type { JwtPayload } from 'jsonwebtoken';
 
 const prisma = new PrismaClient();
-//TODO: Make reusable
-const tokenExpiration = 60 * 60 * 12;
+export const TOKEN_EXPIRATION = 60 * 60 * 12;
 
 interface AuthTokenPayload extends JwtPayload {
 	accountId: string;
@@ -15,7 +14,7 @@ interface AuthTokenPayload extends JwtPayload {
 
 const signToken = async (userId: string, accountId: string) => {
 	const token = await jwt.sign({ userId: userId, accountId: accountId }, env.JWT_SECRET, {
-		expiresIn: tokenExpiration,
+		expiresIn: TOKEN_EXPIRATION,
 	});
 
 	await prisma.user.update({

@@ -10,7 +10,6 @@
 	export let data: PageData;
 </script>
 
-<!-- //TODO: Logout functionality (remove cookie, remove account from store, remove account id from locals) -->
 <PageContent>
 	<h1>Welcome {$account?.displayName || 'Player'}!</h1>
 	<Link to={paths.app.creature.create}>Create a new Creature!</Link>
