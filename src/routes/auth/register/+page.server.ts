@@ -6,7 +6,21 @@ import { paths } from '@src/lib/paths';
 
 import type { Actions, Action } from './$types';
 
-//TODO: password strength requirements
+const checkPasswordRequirements = (password: string): boolean => {
+	const hasNumber = /\d/;
+	const hasUppercase = /[A-Z]/;
+	const hasLowercase = /[a-z]/;
+	const hasSpecialChar = /[\W_]/;
+
+	return (
+		password.length >= 8 &&
+		hasNumber.test(password) &&
+		hasUppercase.test(password) &&
+		hasLowercase.test(password) &&
+		hasSpecialChar.test(password)
+	);
+};
+
 const registerUser: Action = async (event) => {
 	const data = await event.request.formData();
 	const requireData = ['username', 'password', 'confirmPassword'];
@@ -19,6 +33,10 @@ const registerUser: Action = async (event) => {
 
 	if (data.get('password') !== data.get('confirmPassword')) {
 		throw error(400, { message: 'password and confirm password do not match' });
+	}
+
+	if (checkPasswordRequirements(data.get('password') as string) !== true) {
+		throw error(400, { message: 'password does not meet requirements' });
 	}
 
 	const token = await register(data.get('username') as string, data.get('password') as string);

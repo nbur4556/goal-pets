@@ -7,12 +7,12 @@ import { paths } from '@src/lib/paths';
 import type { Action, Actions, PageServerLoad } from './creature/$types';
 
 const logout: Action = async ({ locals, cookies }) => {
-  await removeAuthentication(locals.account);
-  locals.account = "";
-  cookies.delete('session');
+	await removeAuthentication(locals.account);
+	locals.account = '';
+	cookies.delete('session');
 
-  throw redirect(302, paths.home);
-}
+	throw redirect(302, paths.home);
+};
 
 export const load: PageServerLoad = async ({ locals }) => {
 	if (!locals.account) {
@@ -23,5 +23,4 @@ export const load: PageServerLoad = async ({ locals }) => {
 	return { creatures };
 };
 
-
-export const actions: Actions = { default: logout }
+export const actions: Actions = { default: logout };

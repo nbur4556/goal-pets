@@ -73,12 +73,12 @@ export const authenticateToken = async (token: string) => {
 };
 
 export const removeAuthentication = async (accountId?: string) => {
-  if(!accountId) {
-    return;
-  }
+	if (!accountId) {
+		return;
+	}
 
-  await prisma.user.update({
-    where: { accountId: accountId },
-    data: { userAuthToken: "" }
-  });
-}
+	await prisma.user.update({
+		where: { accountId: accountId },
+		data: { userAuthToken: '' },
+	});
+};
