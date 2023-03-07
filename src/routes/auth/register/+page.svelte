@@ -13,14 +13,14 @@
 		<InputPassword name="password">Password:</InputPassword>
 		<InputPassword name="confirmPassword">Confirm Password:</InputPassword>
 
-    <p>Passwords must include:</p>
-    <ul class="list-disc">
-      <li>at least 8 characters</li>
-      <li>lower case character</li>
-      <li>upper case character</li>
-      <li>number</li>
-      <li>special character</li>
-    </ul>
+		<p>Passwords must include:</p>
+		<ul class="list-disc">
+			<li>at least 8 characters</li>
+			<li>lower case character</li>
+			<li>upper case character</li>
+			<li>number</li>
+			<li>special character</li>
+		</ul>
 
 		<InputSubmit />
 	</form>

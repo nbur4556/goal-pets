@@ -1,11 +1,11 @@
 import { PrismaClient } from '@prisma/client';
+import bcrypt from 'bcrypt';
 
 const prisma = new PrismaClient();
 
-//TODO: Add users to account data
-const accountData = [
+const userData = [
 	{
-		displayName: 'nbur4556',
+		username: 'nbur4556',
 		creatures: [
 			{
 				name: 'Test Creature 1',
@@ -25,7 +25,7 @@ const accountData = [
 		],
 	},
 	{
-		displayName: 'testAccount1',
+		username: 'testAccount1',
 		creatures: [
 			{
 				name: 'Test Creature 2',
@@ -40,7 +40,7 @@ const accountData = [
 		],
 	},
 	{
-		displayName: 'testAccount2',
+		username: 'testAccount2',
 		creatures: [
 			{
 				name: 'Test Creature 3',
@@ -52,12 +52,21 @@ const accountData = [
 ];
 
 async function main() {
-	for (const data of accountData) {
-		const result = await prisma.account.create({
+	console.log(process.env.SEED_USER_PASSWORD);
+
+	for (const data of userData) {
+		const passwordHash = await bcrypt.hash(process.env.SEED_USER_PASSWORD, 10);
+		const result = await prisma.user.create({
 			data: {
-				displayName: data.displayName,
-				creatures: {
-					create: data.creatures,
+				username: data.username,
+				passwordHash: passwordHash,
+				account: {
+					create: {
+						displayName: data.username,
+						creatures: {
+							create: data.creatures,
+						},
+					},
 				},
 			},
 		});
