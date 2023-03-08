@@ -11,7 +11,7 @@
 </script>
 
 <PageContent>
-	<h1>Welcome {$account?.displayName || 'Player'}!</h1>
+	<h1 data-testid="welcome-message">Welcome {$account?.displayName || 'Player'}!</h1>
 	<Link to={paths.app.creature.create}>Create a new Creature!</Link>
 
 	<h2>Your Creatures</h2>

@@ -13,15 +13,15 @@ const types = [
 ];
 
 test.describe('create page - select creature type', () => {
-  test.beforeAll(() => dotenv.config());
+	test.beforeAll(() => dotenv.config());
 	test.beforeEach(async ({ page }) => {
-    // LOGIN
-    const username = process.env.TEST_USERNAME as string;
-    const password = process.env.TEST_PASSWORD as string;
+		// LOGIN
+		const username = process.env.TEST_USERNAME as string;
+		const password = process.env.TEST_PASSWORD as string;
 		await page.goto('/auth/login');
-    await page.getByTestId('username').type(username);
-    await page.getByTestId('password').type(password);
-    await page.getByTestId('submit-button').click();
+		await page.getByTestId('username').type(username);
+		await page.getByTestId('password').type(password);
+		await page.getByTestId('submit-button').click();
 
 		await page.goto('/app/creature/create');
 	});
