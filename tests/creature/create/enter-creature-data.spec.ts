@@ -1,10 +1,20 @@
 import { expect, test } from '@playwright/test';
+import dotenv from 'dotenv';
 
 const type = 'intellectual';
 
 test.describe('create page - enter creature data', () => {
+  test.beforeAll(() => dotenv.config());
 	test.beforeEach(async ({ page }) => {
-		await page.goto('/creature/create');
+    // LOGIN
+    const username = process.env.TEST_USERNAME as string;
+    const password = process.env.TEST_PASSWORD as string;
+		await page.goto('/auth/login');
+    await page.getByTestId('username').type(username);
+    await page.getByTestId('password').type(password);
+    await page.getByTestId('submit-button').click();
+
+		await page.goto('/app/creature/create');
 		await page.getByTestId(`${type}-type`).click();
 	});
 

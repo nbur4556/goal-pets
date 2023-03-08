@@ -2,12 +2,11 @@ import { expect, test } from '@playwright/test';
 import dotenv from 'dotenv';
 
 test.describe('creature-data page', () => {
-  test.beforeEach(() => dotenv.config());
-
+  test.beforeAll(() => dotenv.config());
 	test.beforeEach(async ({ page }) => {
+    // LOGIN
     const username = process.env.TEST_USERNAME as string;
     const password = process.env.TEST_PASSWORD as string;
-
 		await page.goto('/auth/login');
     await page.getByTestId('username').type(username);
     await page.getByTestId('password').type(password);
