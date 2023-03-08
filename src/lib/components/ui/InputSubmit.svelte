@@ -1,6 +1,6 @@
 <script>
-	export let testId = 'submit-button';
 	export let value = 'Submit';
+	export let testId = 'submit-button';
 </script>
 
 <!-- // TODO Reuse button styles -->
