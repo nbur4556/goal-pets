@@ -10,5 +10,9 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 	}
 
 	const creature = await findCreatureById(params.id);
+  if(creature.accountId !== locals.account) {
+		throw error(401, 'not authenticated');
+  }
+
 	return { creature };
 };
