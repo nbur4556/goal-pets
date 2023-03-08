@@ -10,21 +10,39 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id            String  @id @default(uuid())
+  username      String  @unique @db.VarChar(255)
+  passwordHash  String  @db.VarChar(255)
+  userAuthToken String?
+
+  account   Account @relation(fields: [accountId], references: [id])
+  accountId String  @unique
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 model Account {
-  id        Int        @id @default(autoincrement())
-  username  String     @unique @db.VarChar(255)
+  id          String @id @default(uuid())
+  displayName String @db.VarChar(255)
+
+  User      User?
   creatures Creature[]
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Creature {
-  id          Int      @id @default(autoincrement())
-  name        String   @db.VarChar(255)
-  type        String   @db.VarChar(255)
-  description String?  @db.VarChar(255)
-  Account     Account  @relation(fields: [accountId], references: [id])
-  accountId   Int
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id          String  @id @default(uuid())
+  name        String  @db.VarChar(255)
+  type        String  @db.VarChar(255)
+  description String? @db.VarChar(255)
+
+  Account   Account @relation(fields: [accountId], references: [id])
+  accountId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

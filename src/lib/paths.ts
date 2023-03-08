@@ -1,7 +1,14 @@
 export const paths = {
 	home: '/',
-	creature: {
-		id: (id: string) => `/creature/${id}`,
-		create: '/creature/create',
+	app: {
+		home: '/app',
+		creature: {
+			id: (id: string) => `/app/creature/${id}`,
+			create: '/app/creature/create',
+		},
+	},
+	auth: {
+		register: '/auth/register',
+		login: '/auth/login',
 	},
 };

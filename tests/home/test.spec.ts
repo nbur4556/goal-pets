@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 import dotenv from 'dotenv';
 
-test.describe('creature-data page', () => {
+test.describe('landing page', () => {
 	test.beforeAll(() => dotenv.config());
 	test.beforeEach(async ({ page }) => {
 		// LOGIN
@@ -11,15 +11,17 @@ test.describe('creature-data page', () => {
 		await page.getByTestId('username').type(username);
 		await page.getByTestId('password').type(password);
 		await page.getByTestId('submit-button').click();
+
+		await page.goto('/app');
 	});
 
 	test('has expected content', async ({ page }) => {
-		await page.goto('/app/creature/78d303c5-8c3d-4d16-a97e-bcc162d52dca');
-		await expect(page.getByTestId('temp-creature')).toBeVisible();
-		await expect(page.getByTestId('display-name')).toBeVisible();
-		await expect(page.getByTestId('display-type')).toBeVisible();
-		await expect(page.getByTestId('display-description')).toBeVisible();
+		await expect(page.getByTestId('welcome-message')).toBeVisible();
+		await expect(page.getByRole('link', { name: 'Create a new Creature' })).toBeVisible();
 	});
 
-	// TODO Test for error page on invalid creature id
+	test('create goal pet link navigates to the create page', async ({ page }) => {
+		await page.getByRole('link', { name: 'Create a new Creature' }).click();
+		await expect(page).toHaveURL(/.*create/);
+	});
 });

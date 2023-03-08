@@ -1,4 +1,4 @@
 export interface AccountClient {
-	id?: number;
-	username: string;
+	id: string;
+	displayName: string;
 }

@@ -3,7 +3,18 @@ import type { CreatureClient } from '@src/lib/types/Creature';
 
 const prisma = new PrismaClient();
 
-export const findCreatureById = async (id: number) => {
+export const findCreaturesByAccount = async (accountId: string) => {
+	const creatures = await prisma.account
+		.findUniqueOrThrow({
+			where: { id: accountId },
+			select: { creatures: true },
+		})
+		.finally(() => prisma.$disconnect());
+
+	return creatures;
+};
+
+export const findCreatureById = async (id: string) => {
 	const creature = await prisma.creature
 		.findUniqueOrThrow({
 			where: { id: id },
@@ -13,12 +24,11 @@ export const findCreatureById = async (id: number) => {
 	return creature;
 };
 
-export const createCreature = async (creatureData: CreatureClient, accountId: number) => {
+export const createCreature = async (creatureData: CreatureClient, accountId: string) => {
 	const creature = await prisma.creature
 		.create({
 			data: {
 				...creatureData,
-				// TODO Validate accountId
 				accountId: accountId,
 			},
 		})

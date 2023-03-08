@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { PageContent } from '@src/lib/components/ui/index.svelte';
-	import { account } from '@src/stores';
 
 	import EnterCreatureData from './EnterCreatureData.svelte';
 	import SelectCreatureType from './SelectCreatureType.svelte';
@@ -14,10 +13,7 @@
 	};
 
 	const onSubmit = (data: FormData) => {
-		if ($account?.id) {
-			data.append('accountId', $account.id.toString());
-			data.append('type', type);
-		}
+		data.append('type', type);
 	};
 </script>
 

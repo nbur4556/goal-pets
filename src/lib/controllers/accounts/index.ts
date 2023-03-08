@@ -7,21 +7,10 @@ export const findAllAccounts = async () => {
 	return allAccounts;
 };
 
-export const findAccount = async (username: string) => {
+export const findAccount = async (accountId: string) => {
 	const account = await prisma.account
 		.findUniqueOrThrow({
-			where: { username: username },
-		})
-		.finally(() => prisma.$disconnect());
-	return account;
-};
-
-export const createAccount = async (username: string) => {
-	const account = await prisma.account
-		.create({
-			data: {
-				username: username,
-			},
+			where: { id: accountId },
 		})
 		.finally(() => prisma.$disconnect());
 	return account;
